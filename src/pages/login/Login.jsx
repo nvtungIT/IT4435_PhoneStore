@@ -54,14 +54,14 @@ const Login = (props) => {
           <Col xs={12} lg={6} className="left-column">
             <Widget className="widget-auth widget-p-lg">
               <div className="d-flex align-items-center justify-content-between py-3">
-                <p className="auth-header mb-0">Login</p>
+                <p className="auth-header mb-0">Đăng nhập</p>
                 <div className="logo-block">
                   <SofiaLogo />
-                  <p className="mb-0">SOFIA</p>
+                  <p className="mb-0">YOUR PHONE STORE</p>
                 </div>
               </div>
               <div className="auth-info my-2">
-                <p>This is a real app with Node.js backend - use <b>"admin@flatlogic.com / password"</b> to login!</p>
+                <p>Quản lý cửa hàng điện thoại của bạn</p>
               </div>
               <form onSubmit={(event) => doLogin(event)}>
                 <FormGroup className="my-3">
@@ -79,8 +79,8 @@ const Login = (props) => {
                 </FormGroup>
                 <FormGroup  className="my-3">
                   <div className="d-flex justify-content-between">
-                    <FormText>Password</FormText>
-                    <Link to="/error">Forgot password?</Link>
+                    <FormText>Mật khẩu</FormText>
+                    <Link to="/error">Quên mật khẩu ?</Link>
                   </div>
                   <Input
                     id="password"
@@ -94,11 +94,11 @@ const Login = (props) => {
                   />
                 </FormGroup>
                 <div className="bg-widget d-flex justify-content-center">
-                  <Button className="rounded-pill my-3" type="submit" color="secondary-red">Login</Button>
+                  <Button className="rounded-pill my-3" type="submit" color="secondary-red">Đăng nhập</Button>
                 </div>
                 <p className="dividing-line my-3">&#8195;Or&#8195;</p>
                 <div className="d-flex align-items-center my-3">
-                  <p className="social-label mb-0">Login with</p>
+                  <p className="social-label mb-0">Đăng nhập với</p>
                   <div className="socials">
                     <a href="https://flatlogic.com/"><GoogleIcon /></a>
                     <a href="https://flatlogic.com/"><TwitterIcon /></a>
@@ -107,7 +107,7 @@ const Login = (props) => {
                     <a href="https://flatlogic.com/"><LinkedinIcon /></a>
                   </div>
                 </div>
-                <Link to="/register">Don’t have an account? Sign Up here</Link>
+                <Link to="/register">Không có tài khoản ? Đăng ký tại đây</Link>
               </form>
             </Widget>
           </Col>
