@@ -54,14 +54,14 @@ const Register = (props) => {
           <Col xs={12} lg={6} className="left-column">
             <Widget className="widget-auth widget-p-lg">
               <div className="d-flex align-items-center justify-content-between py-3">
-                <p className="auth-header mb-0">Sign Up</p>
+                <p className="auth-header mb-0">Đăng ký</p>
                 <div className="logo-block">
                   <SofiaLogo />
-                  <p className="mb-0">SOFIA</p>
+                  <p className="mb-0">YOUR PHONE STORE</p>
                 </div>
               </div>
               <div className="auth-info my-2">
-                <p>This is a real app with Node.js backend - use <b>"admin@flatlogic.com / password"</b> to login!</p>
+                <p>Quản lý cửa hàng điện thoại của bạn</p>
               </div>
               <form onSubmit={(event => doRegister(event))}>
                 <FormGroup className="my-3">
@@ -79,8 +79,8 @@ const Register = (props) => {
                 </FormGroup>
                 <FormGroup  className="my-3">
                   <div className="d-flex justify-content-between">
-                    <FormText>Password</FormText>
-                    <Link to="/error">Forgot password?</Link>
+                    <FormText>Mật khẩu</FormText>
+                    <Link to="/error">Quên mật khẩu ?</Link>
                   </div>
                   <Input
                     id="password"
@@ -90,15 +90,15 @@ const Register = (props) => {
                     type="password"
                     required
                     name="password"
-                    placeholder="Place your password here"
+                    placeholder="Đặt mật khẩu của bạn"
                   />
                 </FormGroup>
                 <div className="bg-widget d-flex justify-content-center">
-                  <Button className="rounded-pill my-3" type="submit" color="secondary-red">Sign Up</Button>
+                  <Button className="rounded-pill my-3" type="submit" color="secondary-red">Đăng ký </Button>
                 </div>
                 <p className="dividing-line my-3">&#8195;Or&#8195;</p>
-                <div className="d-flex align-items-center my-3">
-                  <p className="social-label mb-0">Login with</p>
+                <div className="d-flex align-items-center my-3">  
+                  <p className="social-label mb-0">Đăng nhập với</p>
                   <div className="socials">
                     <a href="https://flatlogic.com/"><GoogleIcon /></a>
                     <a href="https://flatlogic.com/"><TwitterIcon /></a>
@@ -107,7 +107,7 @@ const Register = (props) => {
                     <a href="https://flatlogic.com/"><LinkedinIcon /></a>
                   </div>
                 </div>
-                <Link to="/login">Enter the account</Link>
+                <Link to="/login">Đăng nhập tài khoản có sẵn</Link>
               </form>
             </Widget>
           </Col>
