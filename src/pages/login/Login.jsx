@@ -23,17 +23,30 @@ import TwitterIcon from "../../components/Icons/AuthIcons/TwitterIcon.jsx";
 import FacebookIcon from "../../components/Icons/AuthIcons/FacebookIcon.jsx";
 import GithubIcon from "../../components/Icons/AuthIcons/GithubIcon.jsx";
 import LinkedinIcon from "../../components/Icons/AuthIcons/LinkedinIcon.jsx";
-
+import axios from "axios"
 const Login = (props) => {
 
   const [state, setState] = useState({
-    email: 'admin@flatlogic.com',
-    password: 'password',
+    username: 'user1',
+    password: '1',
   })
 
-  const doLogin = (e) => {
+  const doLogin = async (e) => {
     e.preventDefault();
-    props.dispatch(loginUser({ password: state.password, email: state.email }))
+    console.log('dmm')
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/user/login",
+        state
+      );
+      console.log(response.data);
+      // Perform any additional actions after successful login
+
+    } catch (error) {
+      console.error(error);
+      // Handle error response
+    }
+    
   }
 
   const changeCreds = (event) => {
@@ -67,14 +80,13 @@ const Login = (props) => {
                 <FormGroup className="my-3">
                   <FormText>Email</FormText>
                   <Input
-                    id="email"
+                    id="username"
                     className="input-transparent pl-3"
                     value={state.email}
                     onChange={(event) => changeCreds(event)}
-                    type="email"
                     required
-                    name="email"
-                    placeholder="Email"
+                    name="username"
+                    placeholder="Username"
                   />
                 </FormGroup>
                 <FormGroup  className="my-3">
