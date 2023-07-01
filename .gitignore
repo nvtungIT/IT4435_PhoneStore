@@ -2,7 +2,9 @@
 
 # dependencies
 /node_modules/*
-!/node_modules/bootstrap/
+
+!/node_modules/bootstrap/scss
+!/node_modules/font-awesome/scss
 
 /.pnp
 .pnp.js

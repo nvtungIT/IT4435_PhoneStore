@@ -23,29 +23,47 @@ import TwitterIcon from "../../components/Icons/AuthIcons/TwitterIcon.jsx";
 import FacebookIcon from "../../components/Icons/AuthIcons/FacebookIcon.jsx";
 import GithubIcon from "../../components/Icons/AuthIcons/GithubIcon.jsx";
 import LinkedinIcon from "../../components/Icons/AuthIcons/LinkedinIcon.jsx";
-
+import axios from "axios"
 const Login = (props) => {
 
   const [state, setState] = useState({
-    email: 'admin@flatlogic.com',
-    password: 'password',
+    username: 'admin3',
+    password: '3',
   })
 
-  const doLogin = (e) => {
+  const [redirectToTemplate, setRedirectToTemplate] = useState(false);
+
+  const doLogin = async (e) => {
     e.preventDefault();
-    props.dispatch(loginUser({ password: state.password, email: state.email }))
+    console.log(state)
+    try {
+      const response = await axios.post("http://localhost:3000/user/login", {
+        username: state.username,
+        password: state.password,
+      });
+      // Handle success response here, e.g., store the token, update the authentication state, etc.
+      console.log(response.data.code);
+      if (response.data.code === 1000) {
+        // Redirect to a new page or perform any necessary action
+        setRedirectToTemplate(true);
+      }
+    } catch (error) {
+      // Handle error here, e.g., display an error message
+      console.error(error);
+    }
+
+  }
+
+  if (redirectToTemplate) {
+    return <Redirect to="/template/dashboard" />;
   }
 
   const changeCreds = (event) => {
     setState({ ...state, [event.target.name]: event.target.value })
   }
+  
 
-  const { from } = props.location.state || { from: { pathname: '/template' }};
-  if (hasToken(JSON.parse(localStorage.getItem('authenticated')))) {
-    return (
-      <Redirect to={from} />
-    )
-  }
+ 
 
   return (
     <div className="auth-page">
@@ -65,16 +83,15 @@ const Login = (props) => {
               </div>
               <form onSubmit={(event) => doLogin(event)}>
                 <FormGroup className="my-3">
-                  <FormText>Email</FormText>
+                  <FormText>Username</FormText>
                   <Input
-                    id="email"
+                    id="username"
                     className="input-transparent pl-3"
-                    value={state.email}
+                    value={state.username}
                     onChange={(event) => changeCreds(event)}
-                    type="email"
                     required
-                    name="email"
-                    placeholder="Email"
+                    name="username"
+                    placeholder="Username"
                   />
                 </FormGroup>
                 <FormGroup  className="my-3">
