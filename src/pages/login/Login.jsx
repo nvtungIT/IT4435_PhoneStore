@@ -27,38 +27,43 @@ import axios from "axios"
 const Login = (props) => {
 
   const [state, setState] = useState({
-    username: 'user1',
-    password: '1',
+    username: 'admin3',
+    password: '3',
   })
+
+  const [redirectToTemplate, setRedirectToTemplate] = useState(false);
 
   const doLogin = async (e) => {
     e.preventDefault();
-    console.log('dmm')
+    console.log(state)
     try {
-      const response = await axios.post(
-        "http://localhost:3000/user/login",
-        state
-      );
-      console.log(response.data);
-      // Perform any additional actions after successful login
-
+      const response = await axios.post("http://localhost:3000/user/login", {
+        username: state.username,
+        password: state.password,
+      });
+      // Handle success response here, e.g., store the token, update the authentication state, etc.
+      console.log(response.data.code);
+      if (response.data.code === 1000) {
+        // Redirect to a new page or perform any necessary action
+        setRedirectToTemplate(true);
+      }
     } catch (error) {
+      // Handle error here, e.g., display an error message
       console.error(error);
-      // Handle error response
     }
-    
+
+  }
+
+  if (redirectToTemplate) {
+    return <Redirect to="/template/dashboard" />;
   }
 
   const changeCreds = (event) => {
     setState({ ...state, [event.target.name]: event.target.value })
   }
+  
 
-  const { from } = props.location.state || { from: { pathname: '/template' }};
-  if (hasToken(JSON.parse(localStorage.getItem('authenticated')))) {
-    return (
-      <Redirect to={from} />
-    )
-  }
+ 
 
   return (
     <div className="auth-page">
@@ -78,11 +83,11 @@ const Login = (props) => {
               </div>
               <form onSubmit={(event) => doLogin(event)}>
                 <FormGroup className="my-3">
-                  <FormText>Email</FormText>
+                  <FormText>Username</FormText>
                   <Input
                     id="username"
                     className="input-transparent pl-3"
-                    value={state.email}
+                    value={state.username}
                     onChange={(event) => changeCreds(event)}
                     required
                     name="username"
