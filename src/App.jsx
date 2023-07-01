@@ -1,7 +1,7 @@
 // -- React and related libs
 import React from "react";
 import { Switch, Route, Redirect } from "react-router";
-import { HashRouter } from "react-router-dom";
+
 
 // -- Redux
 import { connect } from "react-redux";
@@ -24,16 +24,7 @@ import isAuthenticated from "./services/authService";
 // -- Component Styles
 import "./styles/app.scss";
 
-const PrivateRoute = ({ dispatch, component, ...rest }) => {
-  if (!isAuthenticated(JSON.parse(localStorage.getItem("authenticated")))) {
-    dispatch(logoutUser());
-    return (<Redirect to="/login" />)
-  } else {
-    return (
-      <Route { ...rest } render={props => (React.createElement(component, props))} />
-    );
-  }
-};
+
 
 const App = (props) => {
   return (
