@@ -38,7 +38,9 @@ const Login = () => {
 
  
 
-  const [redirectToTemplate, setRedirectToTemplate] = useState(false);
+
+
+  
 
   const doLogin = async (e) => {
     e.preventDefault();
