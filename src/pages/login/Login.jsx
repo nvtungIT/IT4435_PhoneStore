@@ -9,6 +9,7 @@ import {
   FormGroup,
   FormText,
   Input,
+  
 } from "reactstrap";
 import Widget from "../../components/Widget/Widget";
 import Footer from "../../components/Footer/Footer";
@@ -33,6 +34,7 @@ const Login = () => {
   });
 
   const redirectAfterLogin = () => {
+    
     history.push("/template/dashboard");
   };
 
@@ -41,6 +43,7 @@ const Login = () => {
   const doLogin = async (e) => {
     e.preventDefault();
     console.log(state);
+    
    
     try {
       const response = await axios.post("http://localhost:3000/user/login", {
@@ -53,9 +56,13 @@ const Login = () => {
       if (response.data.code === '1000') {
         redirectAfterLogin()
       }
+      
+      
     } catch (error) {
+      alert('Login Failed')
+      console.error(error)
       // Handle error here, e.g., display an error message
-      console.error(error);
+      
     }
   };
 

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { withRouter, Redirect, Link } from "react-router-dom";
+import { withRouter, Redirect, Link, useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import {
   Container,
@@ -21,31 +21,45 @@ import TwitterIcon from "../../components/Icons/AuthIcons/TwitterIcon.jsx";
 import FacebookIcon from "../../components/Icons/AuthIcons/FacebookIcon.jsx";
 import GithubIcon from "../../components/Icons/AuthIcons/GithubIcon.jsx";
 import LinkedinIcon from "../../components/Icons/AuthIcons/LinkedinIcon.jsx";
-import { registerUser } from "../../actions/register.js";
-import hasToken from "../../services/authService";
+import axios from "axios";
 
 const Register = (props) => {
-  const [state, setState] = useState({ email: '', password: ''} )
-
+  const [state, setState] = useState({ username: '', password: ''} )
+  const history = useHistory()
   const changeCred = (event) => {
     setState({ ...state, [event.target.name]: event.target.value })
   }
 
-  const doRegister = (event) => {
-    event.preventDefault();
-    props.dispatch(registerUser({
-      creds: state,
-      history: props.history,
-    }))
-  }
+  const redirectAfterRegister = () => {
+    history.push("/template/dashboard");
+  };
 
-  const { from } = props.location.state || { from: { pathname: '/template' } }
 
-  if (hasToken(JSON.parse(localStorage.getItem('authenticated')))) {
-    return (
-      <Redirect to={from} />
-    );
-  }
+  const doRegister = async (e) => {
+    e.preventDefault();
+    console.log(state);
+ 
+   
+    try {
+      const response = await axios.post("http://localhost:3000/user/signup", {
+        username: state.username,
+        password: state.password,
+      });
+
+      // Handle success response here, e.g., store the token, update the authentication state, etc.
+      console.log(response.data.code);
+      if (response.data.code === '1000') {
+         redirectAfterRegister()
+      }
+    } catch (error) {
+      alert('Signup Failed')
+      // Handle error here, e.g., display an error message
+      console.error(error);
+    }
+  };
+
+ 
+
 
   return (
     <div className="auth-page">
@@ -65,16 +79,16 @@ const Register = (props) => {
               </div>
               <form onSubmit={(event => doRegister(event))}>
                 <FormGroup className="my-3">
-                  <FormText>Email</FormText>
+                  <FormText>Username</FormText>
                   <Input
-                    id="email"
+                    id="username"
                     className="input-transparent pl-3"
-                    value={state.email}
+                    value={state.username}
                     onChange={(event) => changeCred(event)}
-                    type="email"
+                   
                     required
-                    name="email"
-                    placeholder="Henry Monk"
+                    name="username"
+                    placeholder="user"
                   />
                 </FormGroup>
                 <FormGroup  className="my-3">
