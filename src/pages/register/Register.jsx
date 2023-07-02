@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { withRouter, Redirect, Link } from "react-router-dom";
+import { withRouter, Redirect, Link, useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import {
   Container,
@@ -21,31 +21,45 @@ import TwitterIcon from "../../components/Icons/AuthIcons/TwitterIcon.jsx";
 import FacebookIcon from "../../components/Icons/AuthIcons/FacebookIcon.jsx";
 import GithubIcon from "../../components/Icons/AuthIcons/GithubIcon.jsx";
 import LinkedinIcon from "../../components/Icons/AuthIcons/LinkedinIcon.jsx";
-import { registerUser } from "../../actions/register.js";
-import hasToken from "../../services/authService";
+import axios from "axios";
 
 const Register = (props) => {
-  const [state, setState] = useState({ email: '', password: ''} )
-
+  const [state, setState] = useState({ username: '', password: ''} )
+  const history = useHistory()
   const changeCred = (event) => {
     setState({ ...state, [event.target.name]: event.target.value })
   }
 
-  const doRegister = (event) => {
-    event.preventDefault();
-    props.dispatch(registerUser({
-      creds: state,
-      history: props.history,
-    }))
-  }
+  const redirectAfterRegister = () => {
+    history.push("/template/dashboard");
+  };
 
-  const { from } = props.location.state || { from: { pathname: '/template' } }
 
-  if (hasToken(JSON.parse(localStorage.getItem('authenticated')))) {
-    return (
-      <Redirect to={from} />
-    );
-  }
+  const doRegister = async (e) => {
+    e.preventDefault();
+    console.log(state);
+ 
+   
+    try {
+      const response = await axios.post("http://localhost:3000/user/signup", {
+        username: state.username,
+        password: state.password,
+      });
+
+      // Handle success response here, e.g., store the token, update the authentication state, etc.
+      console.log(response.data.code);
+      if (response.data.code === '1000') {
+         redirectAfterRegister()
+      }
+    } catch (error) {
+      alert('Signup Failed')
+      // Handle error here, e.g., display an error message
+      console.error(error);
+    }
+  };
+
+ 
+
 
   return (
     <div className="auth-page">
@@ -54,33 +68,33 @@ const Register = (props) => {
           <Col xs={12} lg={6} className="left-column">
             <Widget className="widget-auth widget-p-lg">
               <div className="d-flex align-items-center justify-content-between py-3">
-                <p className="auth-header mb-0">Sign Up</p>
+                <p className="auth-header mb-0">Đăng ký</p>
                 <div className="logo-block">
                   <SofiaLogo />
-                  <p className="mb-0">SOFIA</p>
+                  <p className="mb-0">YOUR PHONE STORE</p>
                 </div>
               </div>
               <div className="auth-info my-2">
-                <p>This is a real app with Node.js backend - use <b>"admin@flatlogic.com / password"</b> to login!</p>
+                <p>Quản lý cửa hàng điện thoại của bạn</p>
               </div>
               <form onSubmit={(event => doRegister(event))}>
                 <FormGroup className="my-3">
-                  <FormText>Email</FormText>
+                  <FormText>Username</FormText>
                   <Input
-                    id="email"
+                    id="username"
                     className="input-transparent pl-3"
-                    value={state.email}
+                    value={state.username}
                     onChange={(event) => changeCred(event)}
-                    type="email"
+                   
                     required
-                    name="email"
-                    placeholder="Henry Monk"
+                    name="username"
+                    placeholder="user"
                   />
                 </FormGroup>
                 <FormGroup  className="my-3">
                   <div className="d-flex justify-content-between">
-                    <FormText>Password</FormText>
-                    <Link to="/error">Forgot password?</Link>
+                    <FormText>Mật khẩu</FormText>
+                    <Link to="/error">Quên mật khẩu ?</Link>
                   </div>
                   <Input
                     id="password"
@@ -90,15 +104,15 @@ const Register = (props) => {
                     type="password"
                     required
                     name="password"
-                    placeholder="Place your password here"
+                    placeholder="Đặt mật khẩu của bạn"
                   />
                 </FormGroup>
                 <div className="bg-widget d-flex justify-content-center">
-                  <Button className="rounded-pill my-3" type="submit" color="secondary-red">Sign Up</Button>
+                  <Button className="rounded-pill my-3" type="submit" color="secondary-red">Đăng ký </Button>
                 </div>
                 <p className="dividing-line my-3">&#8195;Or&#8195;</p>
-                <div className="d-flex align-items-center my-3">
-                  <p className="social-label mb-0">Login with</p>
+                <div className="d-flex align-items-center my-3">  
+                  <p className="social-label mb-0">Đăng nhập với</p>
                   <div className="socials">
                     <a href="https://flatlogic.com/"><GoogleIcon /></a>
                     <a href="https://flatlogic.com/"><TwitterIcon /></a>
@@ -107,7 +121,7 @@ const Register = (props) => {
                     <a href="https://flatlogic.com/"><LinkedinIcon /></a>
                   </div>
                 </div>
-                <Link to="/login">Enter the account</Link>
+                <Link to="/login">Đăng nhập tài khoản có sẵn</Link>
               </form>
             </Widget>
           </Col>

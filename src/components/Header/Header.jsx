@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router";
 import { connect } from "react-redux";
-
+import { useHistory } from "react-router-dom";
 import {
   Navbar,
   Nav,
@@ -41,6 +41,8 @@ import s from "./Header.module.scss";
 import "animate.css";
 
 const Header = (props) => {
+
+  const history = useHistory()
   const [menuOpen, setMenuOpen] = useState(false);
   const [notificationsOpen, setNotificationsOpen] = useState(false);
 
@@ -63,7 +65,7 @@ const Header = (props) => {
   }
 
   const doLogout = () => {
-    props.dispatch(logoutUser());
+    history.push("/login")
   }
 
   return (
