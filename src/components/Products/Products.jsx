@@ -12,9 +12,8 @@ const Products = () => {
   const [productList, setProductList] = useState([]);
   
   const [isLoading, setIsLoading] = useState(true);
-   
-  useEffect(() => {
-    const fetchData = async () => {
+
+  const fetchData = async () => {
       try {
         const  response  = await axios.get('http://localhost:3000/product/get');
         console.log(response.data.data)
@@ -25,13 +24,28 @@ const Products = () => {
       }
       setIsLoading(false);
     };
-
+   
+  useEffect(() => {
     fetchData();
   }, []);
-
+ 
 
   
  
+  
+
+  const onDeleteProduct = async (productId) => {
+    const confirmed = window.confirm("Are you sure you want to delete this product?");
+    if (confirmed) {
+      try {
+        await axios.delete(`http://localhost:3000/product/delete/${productId}`);
+        // Update the product list after successful deletion
+        fetchData()
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  };
   if (isLoading) {
     return <div>Loading...</div>;
   }
@@ -72,12 +86,12 @@ const Products = () => {
                       <td data-label="Loại">{product.categoryName}</td>
                   
                       <td data-label="Sửa" className="right__iconTable">
-                        <Link to={`/template/editProduct/${product.id}}`}>
+                        <Link to={`/template/editProduct/${product.id}`}>
                           <img src={IconEdit} alt="" />
                         </Link>
                       </td>
                       <td data-label="Xoá" className="right__iconTable">
-                        <button><img  src={IconDelete} alt="" /></button>
+                       <img  src={IconDelete} alt=""  onClick={()=>{onDeleteProduct(product.id)}}/>
                         
                       </td>
                     </tr>
