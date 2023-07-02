@@ -61,6 +61,7 @@ const Products = () => {
                   <th>Hình ảnh</th>
                   <th>Giá SP</th>
                   <th>Loại</th>
+                  <th>Trạng thái</th>
                   <th>Sửa</th>
                   <th>Xoá</th>
                 </tr>
@@ -76,6 +77,8 @@ const Products = () => {
                   <td data-label="Giá SP">{product.price}</td>
 
                   <td data-label="Loại">{product.categoryName}</td>
+
+                  <td data-label="Trạng thái">{product.status}</td>
 
                   <td data-label="Sửa" className="right__iconTable">
                     <Link
