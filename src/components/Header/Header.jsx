@@ -18,8 +18,7 @@ import {
   Form,
   FormGroup,
 } from "reactstrap";
-
-import { logoutUser } from "../../actions/auth";
+import { useHistory } from "react-router-dom"
 import { closeSidebar, openSidebar } from "../../actions/navigation";
 import MenuIcon from "../Icons/HeaderIcons/MenuIcon";
 import SearchBarIcon from "../Icons/HeaderIcons/SearchBarIcon";
@@ -41,6 +40,8 @@ import s from "./Header.module.scss";
 import "animate.css";
 
 const Header = (props) => {
+
+  const history = useHistory()
   const [menuOpen, setMenuOpen] = useState(false);
   const [notificationsOpen, setNotificationsOpen] = useState(false);
 
@@ -63,7 +64,9 @@ const Header = (props) => {
   }
 
   const doLogout = () => {
-    props.dispatch(logoutUser());
+
+    history.push("/login")
+    
   }
 
   return (
