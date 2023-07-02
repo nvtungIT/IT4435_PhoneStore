@@ -1,6 +1,29 @@
-import React from "react";
-
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 const InsertProduct = () => {
+  const [phoneCategories, setPhoneCategories] = useState([]);
+  // const [product, setProduct] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
+
+  const fetchCategoryData = async () => {
+    try {
+      const response = await axios.get("http://localhost:3000/category/get");
+      console.log(response.data.data);
+      setPhoneCategories(JSON.parse(response.data.data));
+    } catch (error) {
+      console.error(error);
+    }
+    setIsLoading(false);
+  };
+
+  useEffect(() => {
+    fetchCategoryData();
+  }, []);
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div className="right">
       <div className="right__content">
@@ -9,63 +32,32 @@ const InsertProduct = () => {
         <div className="right__formWrapper">
           <form action="" method="post" encType="multipart/form-data">
             <div className="right__inputWrapper">
-              <label htmlFor="title">Tiêu đề</label>
+              <label htmlFor="title">Tên điện thoại</label>
               <input type="text" placeholder="Tiêu đề" />
             </div>
             <div className="right__inputWrapper">
-              <label htmlFor="p_category">Danh mục</label>
+              <label htmlFor="p_category">Loại</label>
               <select name="">
                 <option disabled="" selected="">
                   Chọn danh mục
                 </option>
-                <option value="">iPhone</option>
-                <option value="">Samsung</option>
+                {phoneCategories.map((category) => (
+                  <option key={category.id} value={category.name}>
+                    {category.name}
+                  </option>
+                ))}
               </select>
             </div>
+
             <div className="right__inputWrapper">
-              <label htmlFor="category">Thể loại</label>
-              <select name="">
-                <option disabled="" selected="">
-                  Chọn thể loại
-                </option>
-                <option value="">Điện thoại</option>
-                <option value="">Laptop</option>
-              </select>
-            </div>
-            <div className="right__inputWrapper">
-              <label htmlFor="image">Hình ảnh 1</label>
-              <input type="file" />
-            </div>
-            <div className="right__inputWrapper">
-              <label htmlFor="image">Hình ảnh 2</label>
-              <input type="file" />
-            </div>
-            <div className="right__inputWrapper">
-              <label htmlFor="image">Hình ảnh 3</label>
-              <input type="file" />
-            </div>
-            <div className="right__inputWrapper">
-              <label htmlFor="label">Nhãn sản phẩm</label>
-              <select name="">
-                <option disabled="" selected="">
-                  Nhãn sản phẩm
-                </option>
-                <option value="new">Mới</option>
-                <option value="sale">Giảm giá</option>
-              </select>
+              <label htmlFor="image">Link hình ảnh </label>
+              <input type="text" />
             </div>
             <div className="right__inputWrapper">
               <label htmlFor="title">Giá sản phẩm</label>
               <input type="text" placeholder="Giá sản phẩm" />
             </div>
-            <div className="right__inputWrapper">
-              <label htmlFor="title">Giá giảm sản phẩm</label>
-              <input type="text" placeholder="Giá giảm sản phẩm" />
-            </div>
-            <div className="right__inputWrapper">
-              <label htmlFor="title">Từ khoá</label>
-              <input type="text" placeholder="Từ khoá" />
-            </div>
+
             <div className="right__inputWrapper">
               <label htmlFor="desc">Mô tả</label>
               <textarea
