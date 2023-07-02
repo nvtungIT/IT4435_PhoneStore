@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router";
 import { connect } from "react-redux";
-
+import { useHistory } from "react-router-dom";
 import {
   Navbar,
   Nav,
@@ -18,7 +18,8 @@ import {
   Form,
   FormGroup,
 } from "reactstrap";
-import { useHistory } from "react-router-dom"
+
+import { logoutUser } from "../../actions/auth";
 import { closeSidebar, openSidebar } from "../../actions/navigation";
 import MenuIcon from "../Icons/HeaderIcons/MenuIcon";
 import SearchBarIcon from "../Icons/HeaderIcons/SearchBarIcon";
@@ -40,34 +41,31 @@ import s from "./Header.module.scss";
 import "animate.css";
 
 const Header = (props) => {
-
-  const history = useHistory()
+  const history = useHistory();
   const [menuOpen, setMenuOpen] = useState(false);
   const [notificationsOpen, setNotificationsOpen] = useState(false);
 
   const toggleNotifications = () => {
     setNotificationsOpen(!notificationsOpen);
-  }
+  };
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
-  }
+  };
 
   const toggleSidebar = () => {
     if (props.sidebarOpened) {
       props.dispatch(closeSidebar());
     } else {
-      const paths = props.location.pathname.split('/');
+      const paths = props.location.pathname.split("/");
       paths.pop();
       props.dispatch(openSidebar());
     }
-  }
+  };
 
   const doLogout = () => {
-
-    history.push("/login")
-    
-  }
+    history.push("/login");
+  };
 
   return (
     <Navbar className={`${s.root} d-print-none`}>
@@ -82,11 +80,15 @@ const Header = (props) => {
       </div>
       <Form className="d-none d-sm-block" inline>
         <FormGroup>
-          <InputGroup className='input-group-no-border'>
-            <Input id="search-input" placeholder="Search Dashboard" className='focus'/>
+          <InputGroup className="input-group-no-border">
+            <Input
+              id="search-input"
+              placeholder="Tìm kiếm..."
+              className="focus"
+            />
             <InputGroupAddon addonType="prepend">
               <span>
-                <SearchBarIcon/>
+                <SearchBarIcon />
               </span>
             </InputGroupAddon>
           </InputGroup>
@@ -94,22 +96,31 @@ const Header = (props) => {
       </Form>
       <Nav className="ml-auto">
         <NavItem className="d-sm-none mr-4">
-          <NavLink
-            className=""
-            href="#"
-          >
+          <NavLink className="" href="#">
             <SearchIcon />
           </NavLink>
         </NavItem>
-        <Dropdown nav isOpen={menuOpen} toggle={() => toggleMenu()} className="tutorial-dropdown mr-2 mr-sm-3">
+        <Dropdown
+          nav
+          isOpen={menuOpen}
+          toggle={() => toggleMenu()}
+          className="tutorial-dropdown mr-2 mr-sm-3"
+        >
           <DropdownToggle nav>
             <div className={s.navbarBlock}>
-              <i className={'eva eva-bell-outline'}/>
+              <i className={"eva eva-bell-outline"} />
               <div className={s.count}></div>
             </div>
           </DropdownToggle>
-          <DropdownMenu right className="navbar-dropdown notifications-dropdown" style={{ width: "340px" }}>
-            <DropdownItem><img src={basketIcon} alt="Basket Icon"/><span>12 new orders have arrived today</span></DropdownItem>
+          <DropdownMenu
+            right
+            className="navbar-dropdown notifications-dropdown"
+            style={{ width: "340px" }}
+          >
+            <DropdownItem>
+              <img src={basketIcon} alt="Basket Icon" />
+              <span>12 new orders have arrived today</span>
+            </DropdownItem>
             <DropdownItem>
               <div>
                 <div className="d-flex flex-row mb-1">
@@ -119,41 +130,79 @@ const Header = (props) => {
                     <p className="label muted">15 min ago</p>
                   </div>
                 </div>
-                <img src={notificationImage} alt="Notification Icon" className={s.notificationImage}/>
-                <p className="body-2 muted">It is just a simple image that can define th..</p>
+                <img
+                  src={notificationImage}
+                  alt="Notification Icon"
+                  className={s.notificationImage}
+                />
+                <p className="body-2 muted">
+                  It is just a simple image that can define th..
+                </p>
               </div>
             </DropdownItem>
-            <DropdownItem><img src={calendarIcon} alt="Calendar Icon"/><span>1 event has been canceled and ...</span></DropdownItem>
-            <DropdownItem><img src={envelopeIcon} alt="Envelope Icon"/><span>you have 2 new messages</span></DropdownItem>
+            <DropdownItem>
+              <img src={calendarIcon} alt="Calendar Icon" />
+              <span>1 event has been canceled and ...</span>
+            </DropdownItem>
+            <DropdownItem>
+              <img src={envelopeIcon} alt="Envelope Icon" />
+              <span>you have 2 new messages</span>
+            </DropdownItem>
           </DropdownMenu>
         </Dropdown>
-        <Dropdown isOpen={notificationsOpen} toggle={() => toggleNotifications()} nav id="basic-nav-dropdown" className="ml-3">
+        <Dropdown
+          isOpen={notificationsOpen}
+          toggle={() => toggleNotifications()}
+          nav
+          id="basic-nav-dropdown"
+          className="ml-3"
+        >
           <DropdownToggle nav caret className="navbar-dropdown-toggle">
             <span className={`${s.avatar} rounded-circle float-left mr-2`}>
-              <img src={userImg} alt="User"/>
+              <img src={userImg} alt="User" />
             </span>
-            <span className="small d-none d-sm-block ml-1 mr-2 body-1">Christina Carey</span>
+            <span className="small d-none d-sm-block ml-1 mr-2 body-1">
+              admin user
+            </span>
           </DropdownToggle>
-          <DropdownMenu className="navbar-dropdown profile-dropdown" style={{ width: "194px" }}>
-            <DropdownItem className={s.dropdownProfileItem}><ProfileIcon/><span>Profile</span></DropdownItem>
-            <DropdownItem className={s.dropdownProfileItem}><TasksIcon/><span>Tasks</span></DropdownItem>
-            <DropdownItem className={s.dropdownProfileItem}><MessagesIcon/><span>Messages</span></DropdownItem>
+          <DropdownMenu
+            className="navbar-dropdown profile-dropdown"
+            style={{ width: "194px" }}
+          >
+            <DropdownItem className={s.dropdownProfileItem}>
+              <ProfileIcon />
+              <span>Profile</span>
+            </DropdownItem>
+            <DropdownItem className={s.dropdownProfileItem}>
+              <TasksIcon />
+              <span>Tasks</span>
+            </DropdownItem>
+            <DropdownItem className={s.dropdownProfileItem}>
+              <MessagesIcon />
+              <span>Messages</span>
+            </DropdownItem>
             <NavItem>
               <NavLink onClick={() => doLogout()} href="#">
-                <button className="btn btn-primary rounded-pill mx-auto logout-btn" type="submit"><img src={logoutIcon} alt="Logout"/><span className="ml-1">Logout</span></button>
+                <button
+                  className="btn btn-primary rounded-pill mx-auto logout-btn"
+                  type="submit"
+                >
+                  <img src={logoutIcon} alt="Logout" />
+                  <span className="ml-1">Logout</span>
+                </button>
               </NavLink>
             </NavItem>
           </DropdownMenu>
         </Dropdown>
       </Nav>
     </Navbar>
-  )
-}
+  );
+};
 
 Header.propTypes = {
   dispatch: PropTypes.func.isRequired,
   sidebarOpened: PropTypes.bool,
-}
+};
 
 function mapStateToProps(store) {
   return {
@@ -163,4 +212,3 @@ function mapStateToProps(store) {
 }
 
 export default withRouter(connect(mapStateToProps)(Header));
-

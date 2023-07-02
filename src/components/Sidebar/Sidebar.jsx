@@ -27,7 +27,7 @@ const Sidebar = (props) => {
   return (
     <nav className={cn(s.root, { [s.sidebarOpen]: burgerSidebarOpen })}>
       <header className={s.logo}>
-        <span className={s.title}>YOUR PHONE STORE</span>
+        <span className={s.title}>PHONE STORE</span>
       </header>
       <ul className={s.nav}>
         <LinksGroup
@@ -40,20 +40,33 @@ const Sidebar = (props) => {
           iconName={<i className={"eva eva-home-outline"} />}
           link="/template/dashboard"
           index="dashboard"
-          badge="9"
+          // badge="9"
         />
-        <h5 className={s.navTitle}>TEMPLATE</h5>
+        <h5 className={s.navTitle}>Menu</h5>
         <LinksGroup
           onActiveSidebarItemChange={(activeItem) =>
             props.dispatch(changeActiveSidebarItem(activeItem))
           }
           activeItem={props.activeItem}
-          header="Điện thoại "
+          header="Tất Cả Điện thoại "
           isHeader
-          iconName={<i className={"eva eva-text-outline"} />}
-          link="/template/typography"
+          iconName={<i className={"eva eva-grid-outline"} />}
+          link="/template/products"
           index="typography"
         />
+
+        <LinksGroup
+          onActiveSidebarItemChange={(activeItem) =>
+            props.dispatch(changeActiveSidebarItem(activeItem))
+          }
+          activeItem={props.activeItem}
+          header="Thêm Điện thoại "
+          isHeader
+          iconName={<i className={"eva eva-book-outline"} />}
+          link="/template/insertProduct"
+          index="typography"
+        />
+
         <LinksGroup
           onActiveSidebarItemChange={(activeItem) =>
             props.dispatch(changeActiveSidebarItem(activeItem))
@@ -61,9 +74,19 @@ const Sidebar = (props) => {
           activeItem={props.activeItem}
           header="Bán điện thoại"
           isHeader
-          iconName={<i className={"eva eva-grid-outline"} />}
-          link="/template/tables"
-          index="tables"
+          iconName={<i className={"eva eva-cube-outline"} />}
+          link="/template/uielements"
+          index="uielements"
+          childrenLinks={[
+            {
+              header: "Tạo hoá đơn bán",
+              link: "/template/createPhoneSale",
+            },
+            {
+              header: "Xem hoá đơn bán",
+              link: "/template/viewsPhoneSale",
+            },
+          ]}
         />
 
         <LinksGroup
@@ -73,34 +96,31 @@ const Sidebar = (props) => {
           activeItem={props.activeItem}
           header="Nhập điện thoại"
           isHeader
-          iconName={<i className={"eva eva-cube-outline"} />}
+          iconName={<i className={"eva eva-book-outline"} />}
           link="/template/uielements"
           index="uielements"
           childrenLinks={[
             {
-              header: "Charts",
-              link: "/template/ui-elements/charts",
+              header: "Tạo H.Đ nhập",
+              link: "/template/createEnterPhone",
             },
             {
-              header: "Icons",
-              link: "/template/ui-elements/icons",
-            },
-            {
-              header: "Google Maps",
-              link: "/template/ui-elements/maps",
+              header: "Xem hoá đơn nhập",
+              link: "/template/viewsEnterPhone",
             },
           ]}
         />
+
         <LinksGroup
           onActiveSidebarItemChange={(activeItem) =>
             props.dispatch(changeActiveSidebarItem(activeItem))
           }
           activeItem={props.activeItem}
-          header="Thông báo"
+          header="Thống kê doanh số"
           isHeader
-          iconName={<i className={"eva eva-bell-outline"} />}
-          link="/template/notifications"
-          index="notifications"
+          iconName={<i className={"eva eva-cube-outline"} />}
+          link="/template/chart"
+          index="typography"
         />
       </ul>
     </nav>
