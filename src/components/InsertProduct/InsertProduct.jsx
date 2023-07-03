@@ -66,7 +66,7 @@ const InsertProduct = () => {
                 type="text"
                 placeholder="Tiêu đề"
                 name="name"
-                value={product.title}
+                value={product.name}
                 onChange={handleInputChange}
               />
             </div>
