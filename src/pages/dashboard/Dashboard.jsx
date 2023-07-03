@@ -1,33 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { v4 as uuidv4 } from "uuid";
-import {
-  Col,
-  Row,
-  Progress,
-  Button,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-  UncontrolledDropdown,
-} from "reactstrap";
-import Widget from "../../components/Widget/Widget.jsx";
-import ApexActivityChart from "./components/ActivityChart.jsx";
 
 import meal1 from "../../assets/dashboard/meal-1.svg";
 import meal2 from "../../assets/dashboard/meal-2.svg";
 import meal3 from "../../assets/dashboard/meal-3.svg";
-import upgradeImage from "../../assets/dashboard/upgradeImage.svg";
-import heartRed from "../../assets/dashboard/heartRed.svg";
-import heartTeal from "../../assets/dashboard/heartTeal.svg";
-import heartViolet from "../../assets/dashboard/heartViolet.svg";
-import heartYellow from "../../assets/dashboard/heartYellow.svg";
-import gymIcon from "../../assets/dashboard/gymIcon.svg";
-import therapyIcon from "../../assets/dashboard/therapyIcon.svg";
-import user from "../../assets/user.svg";
-import statsPie from "../../assets/dashboard/statsPie.svg";
-
-import s from "./Dashboard.module.scss";
 
 import ImgProduct1 from "../../images/product1.jpg";
 import ImgProduct2 from "../../images/product2.jpg";
@@ -35,6 +11,7 @@ import ImgProduct3 from "../../images/product3.jpg";
 import IconEdit from "../../assets/icon-edit.svg";
 import IconDelete from "../../assets/icon-trash-black.svg";
 
+import axios from "axios";
 const Dashboard = () => {
   const [checkboxes, setCheckboxes] = useState([true, false]);
 
@@ -43,6 +20,25 @@ const Dashboard = () => {
       checkboxes.map((checkbox, index) => (index === id ? !checkbox : checkbox))
     );
   };
+
+  const [productList, setProductList] = useState([]);
+
+  const [isLoading, setIsLoading] = useState(true);
+
+  const fetchData = async () => {
+    try {
+      const response = await axios.get("http://localhost:3000/product/get");
+      console.log(response.data.data);
+      setProductList(JSON.parse(response.data.data));
+    } catch (error) {
+      console.error(error);
+    }
+    setIsLoading(false);
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   const meals = [meal1, meal2, meal3];
 
@@ -54,7 +50,7 @@ const Dashboard = () => {
         <div className="right__cards">
           <Link className="right__card" to="/template/products">
             <div className="right__cardTitle">Sản Phẩm</div>
-            <div className="right__cardNumber">72</div>
+            <div className="right__cardNumber">{productList.length}</div>
             <div className="right__cardDesc">Xem Chi Tiết</div>
           </Link>
           <Link className="right__card" to="/template/createPhoneSale">
