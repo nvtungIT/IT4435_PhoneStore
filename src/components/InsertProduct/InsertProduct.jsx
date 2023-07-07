@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-
+import { useHistory } from "react-router-dom";
 const InsertProduct = () => {
+  const history = useHistory();
   const [phoneCategories, setPhoneCategories] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [product, setProduct] = useState({
@@ -36,16 +37,23 @@ const InsertProduct = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    try {
-      const response = await axios.post(
-        "http://localhost:3000/product/add",
-        product
-      );
-      console.log(response.data);
-      // Handle success or show a success message
-    } catch (error) {
-      console.error(error);
-      // Handle error or show an error message
+
+    const confirmed = window.confirm(
+      "Are you sure you want to add this product?"
+    );
+
+    if (confirmed) {
+      try {
+        const response = await axios.post(
+          "http://localhost:3000/product/add",
+          product
+        );
+        console.log(response.data);
+        history.push("/template/products");
+      } catch (error) {
+        console.error(error);
+        // Handle error or show an error message
+      }
     }
   };
 
@@ -77,6 +85,9 @@ const InsertProduct = () => {
                 value={product.categoryId}
                 onChange={handleInputChange}
               >
+                <option disabled="" selected="">
+                  Chọn danh mục
+                </option>
                 {phoneCategories.map((category) => (
                   <option key={category.id} value={category.id}>
                     {category.name}

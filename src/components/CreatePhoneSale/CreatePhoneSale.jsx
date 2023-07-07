@@ -9,51 +9,22 @@ const CreatePhoneSale = () => {
         <div className="right__formWrapper">
           <form action="" method="post" encType="multipart/form-data">
             <div className="right__inputWrapper">
-              <label htmlFor="title">Tiêu đề</label>
-              <input type="text" placeholder="Tiêu đề" />
+              <label htmlFor="title">Tên khách hàng</label>
+              <input type="text" placeholder="Tên khách hàng" />
             </div>
             <div className="right__inputWrapper">
-              <label htmlFor="p_category">Danh mục</label>
-              <select name="">
-                <option disabled="" selected="">
-                  Chọn danh mục
-                </option>
-                <option value="">iPhone</option>
-                <option value="">Samsung</option>
-              </select>
+              <label htmlFor="title">Địa chỉ</label>
+              <input type="text" placeholder="Địa chỉ" />
             </div>
             <div className="right__inputWrapper">
-              <label htmlFor="category">Thể loại</label>
-              <select name="">
-                <option disabled="" selected="">
-                  Chọn thể loại
-                </option>
-                <option value="">Điện thoại</option>
-                <option value="">Laptop</option>
-              </select>
+              <label htmlFor="title">SĐT</label>
+              <input type="text" placeholder="SĐT" />
             </div>
             <div className="right__inputWrapper">
-              <label htmlFor="image">Hình ảnh 1</label>
-              <input type="file" />
+              <label htmlFor="title">Sản phẩm bán</label>
+              <input type="text" placeholder="Sản phẩm bán" />
             </div>
-            <div className="right__inputWrapper">
-              <label htmlFor="image">Hình ảnh 2</label>
-              <input type="file" />
-            </div>
-            <div className="right__inputWrapper">
-              <label htmlFor="image">Hình ảnh 3</label>
-              <input type="file" />
-            </div>
-            <div className="right__inputWrapper">
-              <label htmlFor="label">Nhãn sản phẩm</label>
-              <select name="">
-                <option disabled="" selected="">
-                  Nhãn sản phẩm
-                </option>
-                <option value="new">Mới</option>
-                <option value="sale">Giảm giá</option>
-              </select>
-            </div>
+
             <div className="right__inputWrapper">
               <label htmlFor="title">Giá sản phẩm</label>
               <input type="text" placeholder="Giá sản phẩm" />
@@ -62,10 +33,7 @@ const CreatePhoneSale = () => {
               <label htmlFor="title">Giá giảm sản phẩm</label>
               <input type="text" placeholder="Giá giảm sản phẩm" />
             </div>
-            <div className="right__inputWrapper">
-              <label htmlFor="title">Từ khoá</label>
-              <input type="text" placeholder="Từ khoá" />
-            </div>
+
             <div className="right__inputWrapper">
               <label htmlFor="desc">Mô tả</label>
               <textarea
@@ -77,7 +45,7 @@ const CreatePhoneSale = () => {
                 defaultValue={""}
               />
             </div>
-            <div className="btn">Tạo hoá đơn nhập điện thoại</div>
+            <div className="btn">Tạo hoá đơn bán điện thoại</div>
           </form>
         </div>
       </div>
