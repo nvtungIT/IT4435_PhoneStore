@@ -52,7 +52,7 @@ const EditProduct = () => {
           currproduct
         );
         console.log(response.data);
-        history.push("/template/products");
+        history.push("/admin/products");
       } catch (error) {
         console.error(error);
         // Handle error or show an error message

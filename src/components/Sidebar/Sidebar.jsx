@@ -38,7 +38,7 @@ const Sidebar = (props) => {
           header="Trang chủ"
           isHeader
           iconName={<i className={"eva eva-home-outline"} />}
-          link="/template/dashboard"
+          link="/admin/dashboard"
           index="dashboard"
           // badge="9"
         />
@@ -51,7 +51,7 @@ const Sidebar = (props) => {
           header="Tất Cả Điện thoại "
           isHeader
           iconName={<i className={"eva eva-grid-outline"} />}
-          link="/template/products"
+          link="/admin/products"
           index="typography"
         />
 
@@ -63,7 +63,7 @@ const Sidebar = (props) => {
           header="Thêm Điện thoại "
           isHeader
           iconName={<i className={"eva eva-book-outline"} />}
-          link="/template/insertProduct"
+          link="/admin/insertProduct"
           index="typography"
         />
 
@@ -75,16 +75,16 @@ const Sidebar = (props) => {
           header="Bán điện thoại"
           isHeader
           iconName={<i className={"eva eva-cube-outline"} />}
-          link="/template/uielements"
+          link="/admin/uielements"
           index="uielements"
           childrenLinks={[
             {
               header: "Tạo hoá đơn bán",
-              link: "/template/createPhoneSale",
+              link: "/admin/createPhoneSale",
             },
             {
               header: "Xem hoá đơn bán",
-              link: "/template/viewsPhoneSale",
+              link: "/admin/viewsPhoneSale",
             },
           ]}
         />
@@ -97,16 +97,16 @@ const Sidebar = (props) => {
           header="Nhập điện thoại"
           isHeader
           iconName={<i className={"eva eva-book-outline"} />}
-          link="/template/uielements"
+          link="/admin/uielements"
           index="uielements"
           childrenLinks={[
             {
               header: "Tạo H.Đ nhập",
-              link: "/template/createEnterPhone",
+              link: "/admin/createEnterPhone",
             },
             {
               header: "Xem hoá đơn nhập",
-              link: "/template/viewsEnterPhone",
+              link: "/admin/viewsEnterPhone",
             },
           ]}
         />
@@ -119,7 +119,7 @@ const Sidebar = (props) => {
           header="Thống kê doanh số"
           isHeader
           iconName={<i className={"eva eva-cube-outline"} />}
-          link="/template/chart"
+          link="/admin/chart"
           index="typography"
         />
       </ul>

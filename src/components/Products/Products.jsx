@@ -86,7 +86,7 @@ const Products = () => {
                   <td data-label="Sửa" className="right__iconTable">
                     <Link
                       to={{
-                        pathname: `/template/editProduct/${product.id}`,
+                        pathname: `/admin/editProduct/${product.id}`,
                         state: { product },
                       }}
                     >

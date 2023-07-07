@@ -17,17 +17,13 @@ const App = () => {
     <div>
       <BrowserRouter>
         <Switch>
+          <Route path="/" exact render={() => <Redirect to="/login" />} />
           <Route
-            path="/"
+            path="/admin"
             exact
-            render={() => <Redirect to="/template/dashboard" />}
+            render={() => <Redirect to="/admin/dashboard" />}
           />
-          <Route
-            path="/template"
-            exact
-            render={() => <Redirect to="/template/dashboard" />}
-          />
-          <Route path="/template" component={LayoutComponent} />
+          <Route path="/admin" component={LayoutComponent} />
           <Route path="/login" exact component={Login} />
           <Route path="/error" exact component={ErrorPage} />
           <Route path="/register" exact component={Register} />

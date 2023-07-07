@@ -42,65 +42,61 @@ const Layout = (props) => {
           {/* <Breadcrumbs url={props.location.pathname} /> */}
           <Switch>
             <Route
-              path="/template"
+              path="/admin"
               exact
               render={() => <Redirect to="template/dashboard" />}
             />
-            <Route path="/template/dashboard" exact component={Dashboard} />
-            <Route path="/template/typography" exact component={Typography} />
-            <Route path="/template/tables" exact component={Tables} />
-            <Route path="/template/products" exact component={Products} />
-            <Route path="/template/insertProduct" component={InsertProduct} />
-            <Route path="/template/editProduct/:slug" component={EditProduct} />
+            <Route path="/admin/dashboard" exact component={Dashboard} />
+            <Route path="/admin/typography" exact component={Typography} />
+            <Route path="/admin/tables" exact component={Tables} />
+            <Route path="/admin/products" exact component={Products} />
+            <Route path="/admin/insertProduct" component={InsertProduct} />
+            <Route path="/admin/editProduct/:slug" component={EditProduct} />
             <Route
-              path="/template/createPhoneSale"
+              path="/admin/createPhoneSale"
               exact
               component={CreatePhoneSale}
             />
             <Route
-              path="/template/viewsPhoneSale"
+              path="/admin/viewsPhoneSale"
               exact
               component={ViewsPhoneSale}
             />
             <Route
-              path="/template/editPhoneSale/:slug"
+              path="/admin/editPhoneSale/:slug"
               exact
               component={EditPhoneSale}
             />
             <Route
-              path="/template/createEnterPhone"
+              path="/admin/createEnterPhone"
               exact
               component={CreatePhoneSale}
             />
             <Route
-              path="/template/viewsEnterPhone"
+              path="/admin/viewsEnterPhone"
               exact
               component={ViewsEnterPhone}
             />
             <Route
-              path="/template/editEnterPhone/:slug"
+              path="/admin/editEnterPhone/:slug"
               exact
               component={EditEnterPhone}
             />
-            <Route path="/template/chart" exact component={Chart} />
-            <Route path="/template/orders" exact component={Orders} />
+            <Route path="/admin/chart" exact component={Chart} />
+            <Route path="/admin/orders" exact component={Orders} />
             <Route
-              path="/template/notifications"
+              path="/admin/notifications"
               exact
               component={Notifications}
             />
             <Route
-              path="/template/ui-elements"
+              path="/admin/ui-elements"
               exact
-              render={() => <Redirect to={"/template/ui-elements/charts"} />}
+              render={() => <Redirect to={"/admin/ui-elements/charts"} />}
             />
-            <Route
-              path="/template/ui-elements/charts"
-              exact
-              component={Charts}
-            />
-            <Route path="/template/ui-elements/icons" exact component={Icons} />
-            <Route path="/template/ui-elements/maps" exact component={Maps} />
+            <Route path="/admin/ui-elements/charts" exact component={Charts} />
+            <Route path="/admin/ui-elements/icons" exact component={Icons} />
+            <Route path="/admin/ui-elements/maps" exact component={Maps} />
             <Route path="*" exact render={() => <Redirect to="/error" />} />
           </Switch>
         </main>

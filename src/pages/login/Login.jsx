@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import { Link, withRouter , useHistory} from "react-router-dom";
+import { Link, withRouter, useHistory } from "react-router-dom";
 import {
   Container,
   Row,
@@ -9,7 +9,6 @@ import {
   FormGroup,
   FormText,
   Input,
-  
 } from "reactstrap";
 import Widget from "../../components/Widget/Widget";
 import Footer from "../../components/Footer/Footer";
@@ -24,27 +23,21 @@ import GithubIcon from "../../components/Icons/AuthIcons/GithubIcon.jsx";
 import LinkedinIcon from "../../components/Icons/AuthIcons/LinkedinIcon.jsx";
 
 const Login = () => {
+  const history = useHistory();
 
-  const history = useHistory()
-
-  
   const [state, setState] = useState({
-    username: 'admin3',
-    password: '3',
+    username: "admin3",
+    password: "3",
   });
 
   const redirectAfterLogin = () => {
-    
-    history.push("/template/dashboard");
+    history.push("/admin/dashboard");
   };
-
- 
 
   const doLogin = async (e) => {
     e.preventDefault();
     console.log(state);
-    
-   
+
     try {
       const response = await axios.post("http://localhost:3000/user/login", {
         username: state.username,
@@ -53,20 +46,15 @@ const Login = () => {
 
       // Handle success response here, e.g., store the token, update the authentication state, etc.
       console.log(response.data.code);
-      if (response.data.code === '1000') {
-        redirectAfterLogin()
+      if (response.data.code === "1000") {
+        redirectAfterLogin();
       }
-      
-      
     } catch (error) {
-      alert('Login Failed')
-      console.error(error)
+      alert("Login Failed");
+      console.error(error);
       // Handle error here, e.g., display an error message
-      
     }
   };
-
- 
 
   const changeCreds = (event) => {
     setState({ ...state, [event.target.name]: event.target.value });
@@ -147,9 +135,7 @@ const Login = () => {
                     </a>
                   </div>
                 </div>
-                <Link to="/register">
-                  Không có tài khoản ? Đăng ký tại đây
-                </Link>
+                <Link to="/register">Không có tài khoản ? Đăng ký tại đây</Link>
               </form>
             </Widget>
           </Col>

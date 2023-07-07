@@ -40,7 +40,7 @@ const ViewsPhoneSale = () => {
                   <td data-label="Từ khoá">mobile</td>
                   <td data-label="Thời gian">2020-07-13 21:31:05</td>
                   <td data-label="Sửa" className="right__iconTable">
-                    <Link to="/template/editPhoneSale/iphone14-pro-max-128gb">
+                    <Link to="/admin/editPhoneSale/iphone14-pro-max-128gb">
                       <img src={IconEdit} alt="" />
                     </Link>
                   </td>
@@ -59,7 +59,7 @@ const ViewsPhoneSale = () => {
                   <td data-label="Từ khoá">mobi</td>
                   <td data-label="Thời gian">2020-07-13 22:19:01</td>
                   <td data-label="Sửa" className="right__iconTable">
-                    <Link to="/template/editPhoneSale/iphone-13-pro-max-128gb">
+                    <Link to="/admin/editPhoneSale/iphone-13-pro-max-128gb">
                       <img src={IconEdit} alt="" />
                     </Link>
                   </td>
@@ -78,7 +78,7 @@ const ViewsPhoneSale = () => {
                   <td data-label="Từ khoá">mobi</td>
                   <td data-label="Thời gian">2020-07-13 21:30:41</td>
                   <td data-label="Sửa" className="right__iconTable">
-                    <Link to="/template/editPhoneSale/samsung-s21-fe">
+                    <Link to="/admin/editPhoneSale/samsung-s21-fe">
                       <img src={IconEdit} alt="" />
                     </Link>
                   </td>

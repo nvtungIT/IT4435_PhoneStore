@@ -31,7 +31,7 @@ const Register = (props) => {
   };
 
   const redirectAfterRegister = () => {
-    history.push("/template/dashboard");
+    history.push("/admin/dashboard");
   };
 
   const doRegister = async (e) => {

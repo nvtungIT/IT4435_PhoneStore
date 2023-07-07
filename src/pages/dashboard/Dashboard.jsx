@@ -48,22 +48,22 @@ const Dashboard = () => {
         <div className="right__title">Bảng điều khiển</div>
         <p className="right__desc">Bảng điều khiển</p>
         <div className="right__cards">
-          <Link className="right__card" to="/template/products">
+          <Link className="right__card" to="/admin/products">
             <div className="right__cardTitle">Sản Phẩm</div>
             <div className="right__cardNumber">{productList.length}</div>
             <div className="right__cardDesc">Xem Chi Tiết</div>
           </Link>
-          <Link className="right__card" to="/template/createPhoneSale">
+          <Link className="right__card" to="/admin/createPhoneSale">
             <div className="right__cardTitle">Tạo hoá đơn bán</div>
             <div className="right__cardNumber">12</div>
             <div className="right__cardDesc">Xem Chi Tiết</div>
           </Link>
-          <Link className="right__card" to="/template/createEnterPhone">
+          <Link className="right__card" to="/admin/createEnterPhone">
             <div className="right__cardTitle">Nhập điện thoại</div>
             <div className="right__cardNumber">4</div>
             <div className="right__cardDesc">Xem Chi Tiết</div>
           </Link>
-          <Link className="right__card" to="/template/chart">
+          <Link className="right__card" to="/admin/chart">
             <div className="right__cardTitle">Thống kê doanh thu</div>
             <div className="right__cardNumber">72</div>
             <div className="right__cardDesc">Xem Chi Tiết</div>
@@ -98,7 +98,7 @@ const Dashboard = () => {
                   <td data-label="Từ khoá">mobile</td>
                   <td data-label="Thời gian">2020-07-13 21:31:05</td>
                   <td data-label="Sửa" className="right__iconTable">
-                    <Link to="/template/editProduct/iphone14-pro-max-128gb">
+                    <Link to="/admin/editProduct/iphone14-pro-max-128gb">
                       <img src={IconEdit} alt="" />
                     </Link>
                   </td>
@@ -117,7 +117,7 @@ const Dashboard = () => {
                   <td data-label="Từ khoá">mobi</td>
                   <td data-label="Thời gian">2020-07-13 22:19:01</td>
                   <td data-label="Sửa" className="right__iconTable">
-                    <Link to="/template/editProduct/iphone-13-pro-max-128gb">
+                    <Link to="/admin/editProduct/iphone-13-pro-max-128gb">
                       <img src={IconEdit} alt="" />
                     </Link>
                   </td>
@@ -136,7 +136,7 @@ const Dashboard = () => {
                   <td data-label="Từ khoá">mobi</td>
                   <td data-label="Thời gian">2020-07-13 21:30:41</td>
                   <td data-label="Sửa" className="right__iconTable">
-                    <Link to="/template/editProduct/samsung-s21-fe">
+                    <Link to="/admin/editProduct/samsung-s21-fe">
                       <img src={IconEdit} alt="" />
                     </Link>
                   </td>
@@ -147,7 +147,7 @@ const Dashboard = () => {
               </tbody>
             </table>
           </div>
-          <Link to="/template/products" className="right__tableMore">
+          <Link to="/admin/products" className="right__tableMore">
             <p>Xem tất cả sản phẩm</p>{" "}
           </Link>
         </div>
