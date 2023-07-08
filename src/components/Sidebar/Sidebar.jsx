@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Button } from "reactstrap";
 import { withRouter } from "react-router-dom";
 import s from "./Sidebar.module.scss";
 import LinksGroup from "./LinksGroup/LinksGroup.jsx";
 import { changeActiveSidebarItem } from "../../actions/navigation.js";
-import SofiaLogo from "../Icons/SofiaLogo.jsx";
+
 import cn from "classnames";
 
 const Sidebar = (props) => {
@@ -62,7 +61,7 @@ const Sidebar = (props) => {
           activeItem={props.activeItem}
           header="Thêm Điện thoại "
           isHeader
-          iconName={<i className={"eva eva-book-outline"} />}
+          iconName={<i className={"eva eva-smartphone-outline"} />}
           link="/admin/insertProduct"
           index="typography"
         />
@@ -74,7 +73,7 @@ const Sidebar = (props) => {
           activeItem={props.activeItem}
           header="Bán điện thoại"
           isHeader
-          iconName={<i className={"eva eva-cube-outline"} />}
+          iconName={<i className={"eva eva-shopping-bag-outline"} />}
           link="/admin/uielements"
           index="uielements"
           childrenLinks={[
@@ -94,31 +93,9 @@ const Sidebar = (props) => {
             props.dispatch(changeActiveSidebarItem(activeItem))
           }
           activeItem={props.activeItem}
-          header="Nhập điện thoại"
-          isHeader
-          iconName={<i className={"eva eva-book-outline"} />}
-          link="/admin/uielements"
-          index="uielements"
-          childrenLinks={[
-            {
-              header: "Tạo H.Đ nhập",
-              link: "/admin/createEnterPhone",
-            },
-            {
-              header: "Xem hoá đơn nhập",
-              link: "/admin/viewsEnterPhone",
-            },
-          ]}
-        />
-
-        <LinksGroup
-          onActiveSidebarItemChange={(activeItem) =>
-            props.dispatch(changeActiveSidebarItem(activeItem))
-          }
-          activeItem={props.activeItem}
           header="Thống kê doanh số"
           isHeader
-          iconName={<i className={"eva eva-cube-outline"} />}
+          iconName={<i className={"eva eva-bar-chart-outline"} />}
           link="/admin/chart"
           index="typography"
         />

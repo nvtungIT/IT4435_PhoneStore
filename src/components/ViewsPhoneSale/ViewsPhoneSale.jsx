@@ -1,12 +1,43 @@
-import React from "react";
-import ImgProduct1 from "../../images/product1.jpg";
-import ImgProduct2 from "../../images/product2.jpg";
-import ImgProduct3 from "../../images/product3.jpg";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import IconEdit from "../../assets/icon-edit.svg";
 import IconDelete from "../../assets/icon-trash-black.svg";
 import { Link } from "react-router-dom";
 
 const ViewsPhoneSale = () => {
+  const [orders, setOrders] = useState([]);
+
+  useEffect(() => {
+    // Fetch orders
+    axios
+      .get("http://localhost:3000/order/get")
+      .then((response) => {
+        const updatedOrders = response.data.map((order) => {
+          const tongTien = order.sanPham.reduce(
+            (total, product) => total + parseFloat(product.tongTien),
+            0
+          );
+          return { ...order, tongTien };
+        });
+        setOrders(updatedOrders);
+      })
+      .catch((error) => {
+        console.error("Error fetching orders:", error);
+      });
+  }, []);
+
+  const formatTime = (time) => {
+    const formattedTime = new Date(time).toLocaleString("en-US", {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+    });
+    return formattedTime;
+  };
+
   return (
     <div className="right">
       <div className="right__content">
@@ -18,74 +49,28 @@ const ViewsPhoneSale = () => {
               <thead>
                 <tr>
                   <th>STT</th>
-                  <th>Tên sản phẩm</th>
-                  <th>Hình ảnh</th>
-                  <th>Giá SP</th>
-                  <th>Đã bán</th>
-                  <th>Từ khoá</th>
+                  <th>Tên khách hàng</th>
+                  <th>Địa chỉ</th>
+                  <th>Số điện thoại</th>
+                  <th>Tổng tiền</th>
                   <th>Thời gian</th>
-                  <th>Sửa</th>
                   <th>Xoá</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td data-label="STT">1</td>
-                  <td data-label="Tên sản phẩm"> iPhone 14 Pro Max 128GB</td>
-                  <td data-label="Hình ảnh">
-                    <img src={ImgProduct1} alt="" />
-                  </td>
-                  <td data-label="Giá SP">26.680.000₫</td>
-                  <td data-label="Đã bán">1</td>
-                  <td data-label="Từ khoá">mobile</td>
-                  <td data-label="Thời gian">2020-07-13 21:31:05</td>
-                  <td data-label="Sửa" className="right__iconTable">
-                    <Link to="/admin/editPhoneSale/iphone14-pro-max-128gb">
-                      <img src={IconEdit} alt="" />
-                    </Link>
-                  </td>
-                  <td data-label="Xoá" className="right__iconTable">
-                    <img src={IconDelete} alt="" />
-                  </td>
-                </tr>
-                <tr>
-                  <td data-label="STT">2</td>
-                  <td data-label="Tên sản phẩm">iPhone 13 Pro Max 128GB</td>
-                  <td data-label="Hình ảnh">
-                    <img src={ImgProduct2} alt="" />
-                  </td>
-                  <td data-label="Giá SP">18.500.000₫</td>
-                  <td data-label="Đã bán">0</td>
-                  <td data-label="Từ khoá">mobi</td>
-                  <td data-label="Thời gian">2020-07-13 22:19:01</td>
-                  <td data-label="Sửa" className="right__iconTable">
-                    <Link to="/admin/editPhoneSale/iphone-13-pro-max-128gb">
-                      <img src={IconEdit} alt="" />
-                    </Link>
-                  </td>
-                  <td data-label="Xoá" className="right__iconTable">
-                    <img src={IconDelete} alt="" />
-                  </td>
-                </tr>
-                <tr>
-                  <td data-label="STT">3</td>
-                  <td data-label="Tên sản phẩm">Samsung S21 FE</td>
-                  <td data-label="Hình ảnh">
-                    <img src={ImgProduct3} alt="" />
-                  </td>
-                  <td data-label="Giá SP">12.490.000 ₫</td>
-                  <td data-label="Đã bán">1</td>
-                  <td data-label="Từ khoá">mobi</td>
-                  <td data-label="Thời gian">2020-07-13 21:30:41</td>
-                  <td data-label="Sửa" className="right__iconTable">
-                    <Link to="/admin/editPhoneSale/samsung-s21-fe">
-                      <img src={IconEdit} alt="" />
-                    </Link>
-                  </td>
-                  <td data-label="Xoá" className="right__iconTable">
-                    <img src={IconDelete} alt="" />
-                  </td>
-                </tr>
+                {orders.map((order, index) => (
+                  <tr key={order.id}>
+                    <td data-label="STT">{index + 1}</td>
+                    <td data-label="Tên khách hàng">{order.tenKhachHang}</td>
+                    <td data-label="Địa chỉ">{order.diaChi}</td>
+                    <td data-label="Số điện thoại">{order.SDT}</td>
+                    <td data-label="Tổng tiền">{order.tongTien}</td>
+                    <td data-label="Thời gian">{formatTime(order.ngay)}</td>
+                    <td data-label="Xoá" className="right__iconTable">
+                      <img src={IconDelete} alt="" />
+                    </td>
+                  </tr>
+                ))}
               </tbody>
             </table>
           </div>

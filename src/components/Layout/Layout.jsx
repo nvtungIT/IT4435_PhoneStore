@@ -67,21 +67,7 @@ const Layout = (props) => {
               exact
               component={EditPhoneSale}
             />
-            <Route
-              path="/admin/createEnterPhone"
-              exact
-              component={CreatePhoneSale}
-            />
-            <Route
-              path="/admin/viewsEnterPhone"
-              exact
-              component={ViewsEnterPhone}
-            />
-            <Route
-              path="/admin/editEnterPhone/:slug"
-              exact
-              component={EditEnterPhone}
-            />
+
             <Route path="/admin/chart" exact component={Chart} />
             <Route path="/admin/orders" exact component={Orders} />
             <Route
