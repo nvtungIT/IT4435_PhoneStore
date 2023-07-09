@@ -8,12 +8,11 @@ WORKDIR /app
 COPY . .
 
 # chuyển sang thư mục client và cài đặt các package
-WORKDIR /app/client
 
 
 RUN yarn install 
 
 # expose port 3000
-EXPOSE 3000
+EXPOSE 8080
 # khi container được khởi chạy, sẽ chạy lệnh npm start trong thư mục client
 CMD ["yarn ", "start"]
