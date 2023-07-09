@@ -27,13 +27,15 @@ const CreatePhoneSale = () => {
       (product) => product.id === parseInt(value)
     );
     const updatedProducts = [...products];
-    updatedProducts[index][field] = value;
-    updatedProducts[index].donGia = selectedProduct
-      ? selectedProduct.price
-      : "";
+    updatedProducts[index] = {
+      ...updatedProducts[index],
+      [field]: value,
+      donGia: selectedProduct
+        ? selectedProduct.price
+        : updatedProducts[index].donGia,
+    };
     setProducts(updatedProducts);
   };
-
   const handleAddProduct = () => {
     setProducts([...products, { productId: "", soLuong: "", donGia: "" }]);
   };
@@ -47,23 +49,47 @@ const CreatePhoneSale = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Construct the order object using form data and products state
-    const order = {
-      tenKhachHang: e.target.elements.tenKhachHang.value,
-      diaChi: e.target.elements.diaChi.value,
-      SDT: e.target.elements.SDT.value,
-      sanPham: products,
-      ngay: e.target.elements.ngay.value,
-      thoiGianBaoHanh: e.target.elements.thoiGianBaoHanh.value,
-      description: e.target.elements.description.value,
-    };
+    const requiredFields = [
+      "tenKhachHang",
+      "diaChi",
+      "SDT",
+      "ngay",
+      "thoiGianBaoHanh",
+    ];
+    for (let i = 0; i < requiredFields.length; i++) {
+      const field = requiredFields[i];
+      if (e.target.elements[field].value === "") {
+        alert(`Please fill in the ${field} field`);
+        return;
+      }
+    }
 
-    // Handle the submission of the order object
-    // (e.g., send it to the server)
+    const confirmed = window.confirm(
+      "Are you sure you want to submit the order?"
+    );
+    if (confirmed) {
+      const order = {
+        tenKhachHang: e.target.elements.tenKhachHang.value,
+        diaChi: e.target.elements.diaChi.value,
+        SDT: e.target.elements.SDT.value,
+        sanPham: products,
+        ngay: e.target.elements.ngay.value,
+        thoiGianBaoHanh: e.target.elements.thoiGianBaoHanh.value,
+        description: e.target.elements.description.value,
+      };
 
-    console.log(order);
+      axios
+        .post("http://localhost:3000/order/add", order)
+        .then((response) => {
+          console.log("Order added successfully:", response.data);
+          // Optionally, you can perform any additional actions or show a success message here
+        })
+        .catch((error) => {
+          console.error("Error adding order:", error);
+          // Optionally, you can handle the error or show an error message here
+        });
+    }
   };
-
   return (
     <div className="right">
       <div className="right__content">
