@@ -7,8 +7,7 @@ import { Link } from "react-router-dom";
 const ViewsPhoneSale = () => {
   const [orders, setOrders] = useState([]);
 
-  useEffect(() => {
-    // Fetch orders
+  const fetchOrders = () => {
     axios
       .get("http://localhost:3000/order/get")
       .then((response) => {
@@ -24,6 +23,11 @@ const ViewsPhoneSale = () => {
       .catch((error) => {
         console.error("Error fetching orders:", error);
       });
+  };
+
+  useEffect(() => {
+    // Fetch orders
+    fetchOrders();
   }, []);
 
   const formatTime = (time) => {
@@ -36,6 +40,21 @@ const ViewsPhoneSale = () => {
       second: "2-digit",
     });
     return formattedTime;
+  };
+
+  const onDeleteOrder = async (orderId) => {
+    const confirmed = window.confirm(
+      "Are you sure you want to delete this order?"
+    );
+    if (confirmed) {
+      try {
+        await axios.delete(`http://localhost:3000/order/delete/${orderId}`);
+        // Update the product list after successful deletion
+        fetchOrders();
+      } catch (error) {
+        console.error(error);
+      }
+    }
   };
 
   return (
@@ -52,8 +71,9 @@ const ViewsPhoneSale = () => {
                   <th>Tên khách hàng</th>
                   <th>Địa chỉ</th>
                   <th>Số điện thoại</th>
-                  <th>Tổng tiền</th>
+                  <th>Tổng tiền (triệu đồng)</th>
                   <th>Thời gian</th>
+                  <th> Xem</th>
                   <th>Xoá</th>
                 </tr>
               </thead>
@@ -66,7 +86,16 @@ const ViewsPhoneSale = () => {
                     <td data-label="Số điện thoại">{order.SDT}</td>
                     <td data-label="Tổng tiền">{order.tongTien}</td>
                     <td data-label="Thời gian">{formatTime(order.ngay)}</td>
-                    <td data-label="Xoá" className="right__iconTable">
+                    <td data-label="Xem" className="right__iconTable">
+                      <img src={IconEdit} alt="" />
+                    </td>
+                    <td
+                      onClick={() => {
+                        onDeleteOrder(order.id);
+                      }}
+                      data-label="Xoá"
+                      className="right__iconTable"
+                    >
                       <img src={IconDelete} alt="" />
                     </td>
                   </tr>

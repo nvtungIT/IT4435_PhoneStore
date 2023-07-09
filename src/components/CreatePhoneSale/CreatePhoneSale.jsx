@@ -30,8 +30,8 @@ const CreatePhoneSale = () => {
               <input type="text" placeholder="Giá sản phẩm" />
             </div>
             <div className="right__inputWrapper">
-              <label htmlFor="title">Giá giảm sản phẩm</label>
-              <input type="text" placeholder="Giá giảm sản phẩm" />
+              <label htmlFor="title">Số lượng</label>
+              <input type="number" placeholder="Số lượng" />
             </div>
 
             <div className="right__inputWrapper">
