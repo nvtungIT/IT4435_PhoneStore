@@ -12,7 +12,6 @@ const EditProduct = () => {
   const [currproduct, setProduct] = useState({
     id: product.id,
     name: product.name,
-    categoryId: product.categoryId,
     image: product.image,
     quantity: product.quantity,
     sold: product.sold,
@@ -80,23 +79,6 @@ const EditProduct = () => {
                 value={currproduct.name}
                 onChange={handleInputChange}
               />
-            </div>
-            <div className="right__inputWrapper">
-              <label htmlFor="p_category">Loại</label>
-              <select
-                name="categoryId"
-                value={currproduct.categoryId}
-                onChange={handleInputChange}
-              >
-                <option disabled="" selected="">
-                  Chọn danh mục
-                </option>
-                {phoneCategories.map((category) => (
-                  <option key={category.id} value={category.id}>
-                    {category.name}
-                  </option>
-                ))}
-              </select>
             </div>
 
             <div className="right__inputWrapper">

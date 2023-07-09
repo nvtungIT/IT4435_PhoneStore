@@ -27,9 +27,7 @@ import EditProduct from "../EditProduct/EditProduct";
 import InsertProduct from "../InsertProduct/InsertProduct";
 import CreatePhoneSale from "../CreatePhoneSale/CreatePhoneSale";
 import ViewsPhoneSale from "../ViewsPhoneSale/ViewsPhoneSale";
-import EditPhoneSale from "../EditPhoneSale/EditPhoneSale";
-import ViewsEnterPhone from "../ViewsEnterPhone/ViewsEnterPhone";
-import EditEnterPhone from "../EditEnterPhone/EditEnterPhone";
+import ViewPhoneSaleDetail from "../ViewPhoneSaleDetail/ViewPhoneSaleDetail";
 import { Chart } from "../Chart/Chart";
 
 const Layout = (props) => {
@@ -63,9 +61,9 @@ const Layout = (props) => {
               component={ViewsPhoneSale}
             />
             <Route
-              path="/admin/editPhoneSale/:slug"
+              path="/admin/viewsPhoneSale/:slug"
               exact
-              component={EditPhoneSale}
+              component={ViewPhoneSaleDetail}
             />
 
             <Route path="/admin/chart" exact component={Chart} />

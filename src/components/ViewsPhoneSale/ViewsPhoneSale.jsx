@@ -35,9 +35,6 @@ const ViewsPhoneSale = () => {
       year: "numeric",
       month: "2-digit",
       day: "2-digit",
-      hour: "2-digit",
-      minute: "2-digit",
-      second: "2-digit",
     });
     return formattedTime;
   };
@@ -87,7 +84,14 @@ const ViewsPhoneSale = () => {
                     <td data-label="Tổng tiền">{order.tongTien}</td>
                     <td data-label="Thời gian">{formatTime(order.ngay)}</td>
                     <td data-label="Xem" className="right__iconTable">
-                      <img src={IconEdit} alt="" />
+                      <Link
+                        to={{
+                          pathname: `/admin/viewsPhoneSale/${order.id}`,
+                          state: { order },
+                        }}
+                      >
+                        <img src={IconEdit} alt="" />
+                      </Link>
                     </td>
                     <td
                       onClick={() => {

@@ -22,25 +22,32 @@ const Dashboard = () => {
   };
 
   const [productList, setProductList] = useState([]);
+  const [orderList, setOrderList] = useState([]);
 
   const [isLoading, setIsLoading] = useState(true);
 
   const fetchData = async () => {
     try {
-      const response = await axios.get("http://localhost:3000/product/get");
-      console.log(response.data.data);
-      setProductList(JSON.parse(response.data.data));
+      const [productResponse, orderResponse] = await Promise.all([
+        axios.get("http://localhost:3000/product/get"),
+        axios.get("http://localhost:3000/order/get"),
+      ]);
+
+      const productData = JSON.parse(productResponse.data.data);
+      const orderData = orderResponse.data;
+
+      setProductList(productData);
+      setOrderList(orderData);
+      setIsLoading(false);
     } catch (error) {
       console.error(error);
+      setIsLoading(false); // Make sure to set isLoading to false even if an error occurs
     }
-    setIsLoading(false);
   };
 
   useEffect(() => {
     fetchData();
   }, []);
-
-  const meals = [meal1, meal2, meal3];
 
   return (
     <div className="right">
@@ -55,7 +62,7 @@ const Dashboard = () => {
           </Link>
           <Link className="right__card" to="/admin/createPhoneSale">
             <div className="right__cardTitle">Tạo hoá đơn bán</div>
-            <div className="right__cardNumber">12</div>
+            <div className="right__cardNumber">{orderList.length}</div>
             <div className="right__cardDesc">Xem Chi Tiết</div>
           </Link>
           <Link className="right__card" to="/admin/createEnterPhone">

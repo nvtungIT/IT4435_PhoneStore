@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { useHistory } from "react-router-dom";
 
 const CreatePhoneSale = () => {
+  const history = useHistory();
   const [products, setProducts] = useState([
     { productId: "", soLuong: "", donGia: "" },
   ]);
@@ -82,7 +84,7 @@ const CreatePhoneSale = () => {
         .post("http://localhost:3000/order/add", order)
         .then((response) => {
           console.log("Order added successfully:", response.data);
-          // Optionally, you can perform any additional actions or show a success message here
+          history.push("/admin/viewsPhoneSale");
         })
         .catch((error) => {
           console.error("Error adding order:", error);

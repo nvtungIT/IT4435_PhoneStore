@@ -59,7 +59,7 @@ const Products = () => {
                   <th>STT</th>
                   <th>Tên sản phẩm</th>
                   <th>Hình ảnh</th>
-                  <th>Giá SP</th>
+                  <th>Giá SP (triệu đồng)</th>
                   <th>Loại</th>
                   <th>Đã bán</th>
                   <th>Còn lại</th>
