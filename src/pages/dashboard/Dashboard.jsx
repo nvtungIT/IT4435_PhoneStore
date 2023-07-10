@@ -87,7 +87,7 @@ const Dashboard = () => {
                   <th>Hình ảnh</th>
                   <th>Giá SP</th>
                   <th>Đã bán</th>
-                  <th>Từ khoá</th>
+
                   <th>Thời gian</th>
                   <th>Sửa</th>
                   <th>Xoá</th>
@@ -102,7 +102,7 @@ const Dashboard = () => {
                   </td>
                   <td data-label="Giá SP">26.680.000₫</td>
                   <td data-label="Đã bán">1</td>
-                  <td data-label="Từ khoá">mobile</td>
+
                   <td data-label="Thời gian">2020-07-13 21:31:05</td>
                   <td data-label="Sửa" className="right__iconTable">
                     <Link to="/admin/editProduct/iphone14-pro-max-128gb">
@@ -121,7 +121,7 @@ const Dashboard = () => {
                   </td>
                   <td data-label="Giá SP">18.500.000₫</td>
                   <td data-label="Đã bán">0</td>
-                  <td data-label="Từ khoá">mobi</td>
+
                   <td data-label="Thời gian">2020-07-13 22:19:01</td>
                   <td data-label="Sửa" className="right__iconTable">
                     <Link to="/admin/editProduct/iphone-13-pro-max-128gb">
@@ -140,7 +140,7 @@ const Dashboard = () => {
                   </td>
                   <td data-label="Giá SP">12.490.000 ₫</td>
                   <td data-label="Đã bán">1</td>
-                  <td data-label="Từ khoá">mobi</td>
+
                   <td data-label="Thời gian">2020-07-13 21:30:41</td>
                   <td data-label="Sửa" className="right__iconTable">
                     <Link to="/admin/editProduct/samsung-s21-fe">

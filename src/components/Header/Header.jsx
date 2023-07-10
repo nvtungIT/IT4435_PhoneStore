@@ -162,7 +162,7 @@ const Header = (props) => {
               <img src={userImg} alt="User" />
             </span>
             <span className="small d-none d-sm-block ml-1 mr-2 body-1">
-              admin user
+              Admin
             </span>
           </DropdownToggle>
           <DropdownMenu

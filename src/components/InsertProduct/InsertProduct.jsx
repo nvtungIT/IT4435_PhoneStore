@@ -129,8 +129,10 @@ const InsertProduct = () => {
 
             <div className="right__inputWrapper">
               <label htmlFor="price">
-                Giá sản phẩm (đơn vị : triệu đồng, ví dụ : 10.00 )
+                Giá sản phẩm (đơn vị : triệu đồng, ví dụ : 10.50 (10 triệu 500
+                nghìn đồng) )
               </label>
+
               <input
                 type="text"
                 placeholder="Giá sản phẩm"
